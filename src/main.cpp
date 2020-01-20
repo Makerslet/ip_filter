@@ -32,6 +32,10 @@ int main (int, char **)
     ip_pool.sort(std::greater<std::vector<std::string>>());
     for(const std::vector<std::string>& ip : ip_pool)
         std::cout<< ip << std::endl;
+
+    auto filter1 = filter(ip_pool, {0, "46"});
+    for(const std::vector<std::string>& ip : filter1)
+        std::cout<< ip << std::endl;
 }
 
 

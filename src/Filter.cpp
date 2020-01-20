@@ -1,14 +1,14 @@
 #include "Filter.h"
 
-std::vector<std::vector<std::string>>
-    filter(const std::vector<std::vector<std::string>>& src, const std::string& elem, uint32_t position)
+std::list<std::vector<std::string>>
+    filter(const std::list<std::vector<std::string>>& src, const std::pair<std::size_t, std::string> &to_find)
 {
-    std::vector<std::vector<std::string>> result;
+    std::list<std::vector<std::string>> result;
 
-    auto equal = [elem, position](const std::vector<std::string>& value) {
-        if(value.size() < position)
+    auto equal = [to_find](const std::vector<std::string>& value) {
+        if(value.size() < to_find.first)
             return false;
-        return value[position] == elem;
+        return value[to_find.first] == to_find.second;
     };
     std::copy_if(src.begin(), src.end(), std::back_inserter(result), equal);
 
