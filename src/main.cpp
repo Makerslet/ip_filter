@@ -33,9 +33,19 @@ int main (int, char **)
     for(const std::vector<std::string>& ip : ip_pool)
         std::cout<< ip << std::endl;
 
-    auto filter1 = filter(ip_pool, {0, "46"});
-    for(const std::vector<std::string>& ip : filter1)
+    auto result_simple_filter = filter(ip_pool, {0, "1"});
+    for(const std::vector<std::string>& ip : result_simple_filter)
         std::cout<< ip << std::endl;
+
+    auto result_and_filter = filter_and(ip_pool, {{0, "46"},{1, "70"}});
+    for(const std::vector<std::string>& ip : result_and_filter)
+        std::cout<< ip << std::endl;
+
+    auto result_any_filter = filter_any(ip_pool, "46");
+    for(const std::vector<std::string>& ip : result_any_filter)
+        std::cout << ip << std::endl;
+
+    return 0;
 }
 
 

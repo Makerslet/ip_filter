@@ -4,6 +4,6 @@
 #include <vector>
 #include <string>
 
-std::vector<std::string> split(const std::string &str, char d);
+std::vector<std::string> split(const std::string &str, char delimeter);
 
 #endif // PARSER_H
