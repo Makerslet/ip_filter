@@ -1,17 +1,37 @@
 #include <iostream>
-#include <vector>
+#include <list>
 #include "Filter.h"
+#include "Parser.h"
+
+std::ostream& operator<<(std::ostream& os, const std::vector<std::string>& obj) {
+    if(obj.size() == 0)
+        return os;
+
+    std::size_t index = 0;
+    while(index < obj.size() - 1)
+        os << obj[index++] << ".";
+    os << obj[index];
+
+    return os;
+}
 
 int main (int, char **)
 {
-    std::vector<std::vector<std::string>> ips = {
-        {std::vector<std::string>{"113","162","145","156"}},
-        {std::vector<std::string>{"79","180","73","190"}},
-        {std::vector<std::string>{"179","210","145","4"}},
-        {std::vector<std::string>{"219","102","120","135"}},
-        {std::vector<std::string>{"67","232","81","208"}},
-    };
+    std::list<std::vector<std::string>> ip_pool;
+    for(std::string line; std::getline(std::cin, line);)
+    {
+        std::vector<std::string> tokens = split(line, '\t');
+        if(tokens.size() > 0)
+        {
+            std::vector<std::string> ip = split(tokens[0], '.');
+            if(ip.size() == 4)
+                ip_pool.emplace_back(std::move(ip));
+        }
+    }
 
-    std::sort(ips.begin(), ips.end());
-    auto result = filter(ips, "67", 0);
+    ip_pool.sort(std::greater<std::vector<std::string>>());
+    for(const std::vector<std::string>& ip : ip_pool)
+        std::cout<< ip << std::endl;
 }
+
+
