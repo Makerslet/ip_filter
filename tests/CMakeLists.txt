@@ -1,37 +1,36 @@
 cmake_minimum_required(VERSION 3.2)
 
-add_executable(test_version_gtest test_version_gtest.cpp)
+add_executable(test_ip_filter test_ip_filter.cpp)
 
 # включаем 14 стандарт для наших целей
-set_target_properties(test_version_gtest PROPERTIES
+set_target_properties(test_ip_filter PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
 )
 
 # подключим инклуды из основного каталога проекта
-target_include_directories(test_version_gtest
+target_include_directories(test_ip_filter
     PRIVATE "${PROJECT_SOURCE_DIR}/src"
 )
 
-target_include_directories(test_version_gtest
+target_include_directories(test_ip_filter
     PRIVATE ${GTEST_INCLUDE_DIRS}
 )
 
-target_link_libraries(test_version_gtest
+target_link_libraries(test_ip_filter
     ${GTEST_BOTH_LIBRARIES}
     Threads::Threads
-    helloworld
 )
 
 # максимально строгие настройки компилятора
 if (MSVC)
-    target_compile_options(test_version_gtest PRIVATE
+    target_compile_options(test_ip_filter PRIVATE
         /W4
     )
 else ()
-    target_compile_options(test_version_gtest PRIVATE
+    target_compile_options(test_ip_filter PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
 endif()
 
-add_test(test_version_gtest test_version_gtest)
+add_test(test_ip_filter test_ip_filter)

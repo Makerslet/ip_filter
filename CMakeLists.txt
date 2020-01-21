@@ -9,12 +9,12 @@ else()
     project(ip_filter VERSION 0.0.1)
 endif()
 
-#find_package(Threads REQUIRED)
-#find_package(GTest REQUIRED)
+find_package(Threads REQUIRED)
+find_package(GTest REQUIRED)
 
 # включаем тесты
-#enable_testing()
+enable_testing()
 
 # подключаем тесты
 add_subdirectory(src)
-#add_subdirectory(tests)
+add_subdirectory(tests)

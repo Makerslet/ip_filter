@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.2)
 
 
-add_executable(ip_filter main.cpp Filter.h Filter.cpp
-                                  Parser.h Parser.cpp
-                                  IpAddr.h IpAddr.cpp)
+add_executable(ip_filter    main.cpp
+                            Filter.h Filter.cpp
+                            Parser.h Parser.cpp
+                            IpAddr.h IpAddr.cpp)
 
 # включаем 14 стандарт для наших целей
 set_target_properties(ip_filter PROPERTIES
@@ -29,15 +30,15 @@ else ()
 endif()
 
 # бинарник кладем в каталог bin
-#install(TARGETS helloworld_cli RUNTIME DESTINATION bin)
+install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
 # генерить будем deb пакет
-#set(CPACK_GENERATOR DEB)
+set(CPACK_GENERATOR DEB)
 
 # конфигурируем deb пакет
-#set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
-#set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
-#set(CPACK_PACKAGE_CONTACT oshuev.valery@yandex.ru)
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
+set(CPACK_PACKAGE_CONTACT oshuev.valery@yandex.ru)
 
 # подключем генератор пакетов
-#include(CPack)
+include(CPack)
