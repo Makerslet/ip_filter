@@ -5,21 +5,21 @@
 #include <list>
 #include <string>
 #include <algorithm>
+#include "IpAddr.h"
 
-std::list<std::vector<std::string>>
-    filter(const std::list<std::vector<std::string>>& src,
-           const std::pair<std::size_t, std::string>& to_find);
+std::list<ipv4_addr>
+    filter(const std::list<ipv4_addr>& src,
+           const std::pair<std::size_t, unsigned char>& to_find);
 
-std::list<std::vector<std::string>>
-    filter_and(const std::list<std::vector<std::string>>& src,
-           const std::vector<std::pair<std::size_t, std::string>>& to_find);
+std::list<ipv4_addr>
+    filter_and(const std::list<ipv4_addr>& src,
+           const std::vector<std::pair<std::size_t, unsigned char>>& to_find);
 
-std::list<std::vector<std::string>>
-    filter_or(const std::list<std::vector<std::string>>& src,
-           const std::vector<std::pair<std::size_t, std::string>>& to_find);
+std::list<ipv4_addr>
+    filter_or(std::list<ipv4_addr>& src,
+           const std::vector<std::pair<std::size_t, unsigned char>>& to_find);
 
-std::list<std::vector<std::string>>
-    filter_any(const std::list<std::vector<std::string>>& src,
-           const std::string& to_find);
+std::list<ipv4_addr>
+    filter_any(std::list<ipv4_addr>& src, unsigned char to_find);
 
 #endif // FILTER_H

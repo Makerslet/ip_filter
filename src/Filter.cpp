@@ -1,33 +1,31 @@
 #include "Filter.h"
-#include "PrintIp.h"
 #include <iostream>
 
-std::list<std::vector<std::string>>
-    filter(const std::list<std::vector<std::string>>& src, const std::pair<std::size_t, std::string> &to_find)
+std::list<ipv4_addr> filter(const std::list<ipv4_addr> &src, const std::pair<std::size_t, unsigned char> &to_find)
 {
-    std::list<std::vector<std::string>> result;
+    std::list<ipv4_addr> result;
 
-    auto equal = [to_find](const std::vector<std::string>& value) {
-        if(value.size() < to_find.first)
+    auto equal = [to_find](const ipv4_addr& value) {
+        if(to_find.first > 3)
             return false;
 
         bool result = value[to_find.first] == to_find.second;
         return result;
     };
+
     std::copy_if(src.begin(), src.end(), std::back_inserter(result), equal);
 
     return result;
 }
 
-std::list<std::vector<std::string>>
-    filter_and(const std::list<std::vector<std::string>>& src,
-           const std::vector<std::pair<std::size_t, std::string>>& to_find)
+std::list<ipv4_addr> filter_and(const std::list<ipv4_addr> &src,
+           const std::vector<std::pair<std::size_t, unsigned char> > &to_find)
 {
-    std::list<std::vector<std::string>> result;
+    std::list<ipv4_addr> result;
 
-    auto equal = [to_find](const std::vector<std::string>& value) {
+    auto equal = [to_find](const ipv4_addr& value) {
         for(const auto& pair : to_find)
-            if(value.size() < pair.first)
+            if(pair.first > 3)
                 return false;
 
         for(const auto& pair : to_find)
@@ -36,20 +34,20 @@ std::list<std::vector<std::string>>
 
         return true;
     };
+
     std::copy_if(src.begin(), src.end(), std::back_inserter(result), equal);
 
     return result;
 }
 
-std::list<std::vector<std::string>>
-    filter_or(const std::list<std::vector<std::string>>& src,
-           const std::vector<std::pair<std::size_t, std::string>>& to_find)
+std::list<ipv4_addr> filter_or(std::list<ipv4_addr> &src,
+           const std::vector<std::pair<std::size_t, unsigned char> > &to_find)
 {
-    std::list<std::vector<std::string>> result;
+    std::list<ipv4_addr> result;
 
-    auto equal = [to_find](const std::vector<std::string>& value) {
+    auto equal = [to_find](const ipv4_addr& value) {
         for(const auto& pair : to_find)
-            if(value.size() < pair.first)
+            if(pair.first > 3)
                 return false;
 
         for(const auto& pair : to_find)
@@ -58,19 +56,19 @@ std::list<std::vector<std::string>>
 
         return false;
     };
+
     std::copy_if(src.begin(), src.end(), std::back_inserter(result), equal);
 
     return result;
 }
 
-std::list<std::vector<std::string>>
-    filter_any(const std::list<std::vector<std::string>>& src,
-           const std::string &to_find)
+std::list<ipv4_addr> filter_any(std::list<ipv4_addr> &src,
+           unsigned char to_find)
 {
-    std::list<std::vector<std::string>> result;
+    std::list<ipv4_addr> result;
 
-    auto equal = [to_find](const std::vector<std::string>& value) {
-        return std::find(value.begin(), value.end(), to_find) != value.end();
+    auto equal = [to_find](const ipv4_addr& value) {
+        return value.contains(to_find);
     };
 
     std::copy_if(src.begin(), src.end(), std::back_inserter(result), equal);
