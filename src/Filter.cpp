@@ -1,4 +1,6 @@
 #include "Filter.h"
+#include "PrintIp.h"
+#include <iostream>
 
 std::list<std::vector<std::string>>
     filter(const std::list<std::vector<std::string>>& src, const std::pair<std::size_t, std::string> &to_find)
@@ -8,7 +10,9 @@ std::list<std::vector<std::string>>
     auto equal = [to_find](const std::vector<std::string>& value) {
         if(value.size() < to_find.first)
             return false;
-        return value[to_find.first] == to_find.second;
+
+        bool result = value[to_find.first] == to_find.second;
+        return result;
     };
     std::copy_if(src.begin(), src.end(), std::back_inserter(result), equal);
 

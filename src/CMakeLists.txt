@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.2)
 
 
-add_executable(ip_filter main.cpp Filter.h Filter.cpp Parser.h Parser.cpp)
+add_executable(ip_filter main.cpp Filter.h Filter.cpp
+                                  Parser.h Parser.cpp
+                                  PrintIp.h PrintIp.cpp)
 
 # включаем 14 стандарт для наших целей
 set_target_properties(ip_filter PROPERTIES

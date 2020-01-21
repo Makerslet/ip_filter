@@ -2,18 +2,7 @@
 #include <list>
 #include "Filter.h"
 #include "Parser.h"
-
-std::ostream& operator<<(std::ostream& os, const std::vector<std::string>& obj) {
-    if(obj.size() == 0)
-        return os;
-
-    std::size_t index = 0;
-    while(index < obj.size() - 1)
-        os << obj[index++] << ".";
-    os << obj[index];
-
-    return os;
-}
+#include "PrintIp.h"
 
 int main (int, char **)
 {
@@ -29,7 +18,23 @@ int main (int, char **)
         }
     }
 
-    ip_pool.sort(std::greater<std::vector<std::string>>());
+    auto comparator = [](const std::vector<std::string>& lhs,
+            const std::vector<std::string>& rhs) {
+
+        for(std::size_t i = 0; i < lhs.size(); ++i)
+        {
+            int left = std::stoi(lhs[i]);
+            int right = std::stoi(rhs[i]);
+            if(left == right)
+                continue;
+            else
+                return left > right;
+        }
+
+        return true;
+    };
+
+    ip_pool.sort(comparator);
     for(const std::vector<std::string>& ip : ip_pool)
         std::cout<< ip << std::endl;
 
