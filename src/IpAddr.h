@@ -12,6 +12,8 @@ public:
     bool empty() const;
     bool contains(unsigned char) const;
 
+    static std::size_t num_components();
+
     bool operator<(const ipv4_addr& rhs) const;
     bool operator>(const ipv4_addr& rhs) const;
     bool operator==(const ipv4_addr& rhs) const;

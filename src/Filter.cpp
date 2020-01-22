@@ -6,7 +6,7 @@ std::list<ipv4_addr> filter(const std::list<ipv4_addr> &src, const std::pair<std
     std::list<ipv4_addr> result;
 
     auto equal = [to_find](const ipv4_addr& value) {
-        if(to_find.first > 3)
+        if(to_find.first >= ipv4_addr::num_components())
             return false;
 
         bool result = value[to_find.first] == to_find.second;
@@ -25,7 +25,7 @@ std::list<ipv4_addr> filter_and(const std::list<ipv4_addr> &src,
 
     auto equal = [to_find](const ipv4_addr& value) {
         for(const auto& pair : to_find)
-            if(pair.first > 3)
+            if(pair.first > ipv4_addr::num_components())
                 return false;
 
         for(const auto& pair : to_find)
@@ -47,7 +47,7 @@ std::list<ipv4_addr> filter_or(std::list<ipv4_addr> &src,
 
     auto equal = [to_find](const ipv4_addr& value) {
         for(const auto& pair : to_find)
-            if(pair.first > 3)
+            if(pair.first > ipv4_addr::num_components())
                 return false;
 
         for(const auto& pair : to_find)

@@ -113,6 +113,11 @@ bool ipv4_addr::contains(unsigned char value) const
     return std::find(_numbersIp.cbegin(), _numbersIp.cend(), value) != _numbersIp.cend();
 }
 
+std::size_t ipv4_addr::num_components()
+{
+    return 4;
+}
+
 
 std::ostream& operator<<(std::ostream& os, const ipv4_addr& obj)
 {
