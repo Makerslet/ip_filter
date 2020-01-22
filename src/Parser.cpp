@@ -4,6 +4,9 @@ std::vector<std::string> split(const std::string &str, char delimeter)
 {
     std::vector<std::string> result;
 
+    if(str.empty())
+        return result;
+
     std::string::size_type start_pos = 0;
     std::string::size_type stop_pos = str.find_first_of(delimeter);
 
@@ -15,7 +18,8 @@ std::vector<std::string> split(const std::string &str, char delimeter)
         stop_pos = str.find_first_of(delimeter, start_pos);
     }
 
-    result.emplace_back(str.substr(start_pos));
+    if(start_pos < str.size())
+        result.emplace_back(str.substr(start_pos));
 
     return result;
 }
