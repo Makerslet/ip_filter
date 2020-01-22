@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.2)
 
 add_executable(test_ip_filter   test_ip_filter.cpp
-                                ${PROJECT_SOURCE_DIR}/src/Parser.cpp)
+                                ${PROJECT_SOURCE_DIR}/src/Parser.cpp
+                                ${PROJECT_SOURCE_DIR}/src/IpAddr.cpp)
 
 # включаем 14 стандарт для наших целей
 set_target_properties(test_ip_filter PROPERTIES

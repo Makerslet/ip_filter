@@ -23,7 +23,7 @@ std::array<unsigned char, 4> ipv4_addr::toIntArray(const std::vector<std::string
     {
         int result_int = std::stoi(tokens[index]);
         if(result_int < 0 || result_int > 255)
-            throw std::invalid_argument("");
+            throw std::invalid_argument("token out of range");
 
         result[index] = static_cast<unsigned char>(result_int);
     }
@@ -62,10 +62,10 @@ bool ipv4_addr::operator<(const ipv4_addr& rhs) const
 unsigned char ipv4_addr::operator[](std::size_t index) const
 {
     if(empty())
-        return 0;
+        throw std::out_of_range("index out of range");
 
     if(index > 3)
-        return  0;
+        throw std::out_of_range("index out of range");
 
     return _numbersIp[index];
 }
