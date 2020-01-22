@@ -1,5 +1,7 @@
 #include "Parser.h"
 #include "IpAddr.h"
+#include "Filter.h"
+#include <list>
 #include <gtest/gtest.h>
 
 
@@ -177,6 +179,93 @@ TEST(IPADDR_CLASS, OPERATOR_NOT_EQ)
 
     // Act & Assert
     ASSERT_TRUE(ip_addr_1 != ip_addr_2);
+}
+
+TEST(FILTER, SIMPLE_FILTER)
+{
+    // Arrange
+    std::list<ipv4_addr> adresses = {
+        ipv4_addr({"1","2","3","4"}),
+        ipv4_addr({"5","6","7","8"}),
+        ipv4_addr({"9","10","11","12"}),
+        ipv4_addr({"13","14","15","16"}),
+        ipv4_addr({"17","18","19","20"}),
+        ipv4_addr({"21","22","23","24"}),
+        ipv4_addr({"25","26","27","28"}),
+    };
+
+    // Act
+    std::list<ipv4_addr> filtered = filter(adresses, {0, 13});
+
+    // Assert
+    ASSERT_EQ(filtered.size(), 1);
+    ASSERT_EQ(*filtered.begin(), ipv4_addr({"13","14","15","16"}));
+}
+
+TEST(FILTER, AND_FILTER)
+{
+    // Arrange
+    std::list<ipv4_addr> adresses = {
+        ipv4_addr({"1","2","3","4"}),
+        ipv4_addr({"5","6","7","8"}),
+        ipv4_addr({"9","10","11","12"}),
+        ipv4_addr({"13","14","15","16"}),
+        ipv4_addr({"17","18","19","20"}),
+        ipv4_addr({"21","22","23","24"}),
+        ipv4_addr({"25","26","27","28"}),
+    };
+
+    // Act
+    std::list<ipv4_addr> filtered = filter_and(adresses, {{0, 13},{1, 14}});
+
+    // Assert
+    ASSERT_EQ(filtered.size(), 1);
+    ASSERT_NE(std::find(filtered.begin(), filtered.end(), ipv4_addr({"13","14","15","16"})), filtered.end());
+}
+
+TEST(FILTER, OR_FILTER)
+{
+    // Arrange
+    std::list<ipv4_addr> adresses = {
+        ipv4_addr({"1","2","3","4"}),
+        ipv4_addr({"5","6","7","8"}),
+        ipv4_addr({"9","10","11","12"}),
+        ipv4_addr({"13","14","15","16"}),
+        ipv4_addr({"17","18","19","20"}),
+        ipv4_addr({"21","22","23","24"}),
+        ipv4_addr({"25","26","27","28"}),
+    };
+
+    // Act
+    std::list<ipv4_addr> filtered = filter_or(adresses, {{0, 13},{0, 9}});
+
+    // Assert
+    ASSERT_EQ(filtered.size(), 2);
+    ASSERT_NE(std::find(filtered.begin(), filtered.end(), ipv4_addr({"9","10","11","12"})), filtered.end());
+    ASSERT_NE(std::find(filtered.begin(), filtered.end(), ipv4_addr({"13","14","15","16"})), filtered.end());
+}
+
+TEST(FILTER, ANY_FILTER)
+{
+    // Arrange
+    std::list<ipv4_addr> adresses = {
+        ipv4_addr({"1","2","3","4"}),
+        ipv4_addr({"5","6","7","8"}),
+        ipv4_addr({"9","10","11","12"}),
+        ipv4_addr({"13","14","15","16"}),
+        ipv4_addr({"17","18","19","20"}),
+        ipv4_addr({"21","22","23","24"}),
+        ipv4_addr({"25","26","27","28"}),
+        ipv4_addr({"10","20","30","40"}),
+    };
+
+    // Act
+    std::list<ipv4_addr> filtered = filter_any(adresses, 10);
+
+    // Assert
+    ASSERT_EQ(filtered.size(), 2);
+    ASSERT_NE(std::find(filtered.begin(), filtered.end(), ipv4_addr({"9","10","11","12"})), filtered.end());
+    ASSERT_NE(std::find(filtered.begin(), filtered.end(), ipv4_addr({"10","20","30","40"})), filtered.end());
 }
 
 
