@@ -1,11 +1,10 @@
 sudo: required
 language: cpp
 before_script:
-- sudo ./gtest_install_script.sh
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get update -qq
+- sudo ./gtest_install_script.sh
 script:
-- pwd
 - cmake .
 - cmake --build .
 - cmake --build . --target test
