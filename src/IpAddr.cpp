@@ -46,7 +46,7 @@ std::string ipv4_addr::toString(const std::vector<std::string>& tokens) const
 bool ipv4_addr::operator<(const ipv4_addr& rhs) const
 {
     if(empty() || rhs.empty())
-        return false;
+        throw std::invalid_argument("argument is empty");
 
     for(std::size_t index = 0; index < 4; ++index)
     {
@@ -57,6 +57,36 @@ bool ipv4_addr::operator<(const ipv4_addr& rhs) const
     }
 
     return false;
+}
+
+bool ipv4_addr::operator>(const ipv4_addr& rhs) const
+{
+    if(empty() || rhs.empty())
+        throw std::invalid_argument("argument is empty");
+
+    return rhs < *this;
+}
+
+bool ipv4_addr::operator==(const ipv4_addr& rhs) const
+{
+    if(empty() || rhs.empty())
+        throw std::invalid_argument("argument is empty");
+
+    bool less = *this < rhs;
+    bool greater = *this > rhs;
+
+    return !less && !greater;
+}
+
+bool ipv4_addr::operator!=(const ipv4_addr& rhs) const
+{
+    if(empty() || rhs.empty())
+        throw std::invalid_argument("argument is empty");
+
+    bool less = *this < rhs;
+    bool greater = *this > rhs;
+
+    return less || greater;
 }
 
 unsigned char ipv4_addr::operator[](std::size_t index) const

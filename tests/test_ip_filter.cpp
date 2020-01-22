@@ -141,7 +141,44 @@ TEST(IPADDR_CLASS, OPERATOR_LESS)
     // Act & Assert
     ASSERT_TRUE(ip_addr_1 < ip_addr_2);
     ASSERT_FALSE(ip_addr_1 < ip_addr_1);
-
 }
+
+TEST(IPADDR_CLASS, OPERATOR_GREATER)
+{
+    // Arrange
+    std::vector<std::string> tokens_1 = {"192","168","1","10"};
+    ipv4_addr ip_addr_1(tokens_1);
+    std::vector<std::string> tokens_2 = {"192","168","1","20"};
+    ipv4_addr ip_addr_2(tokens_2);
+
+    // Act & Assert
+    ASSERT_TRUE(ip_addr_2 > ip_addr_1);
+    ASSERT_FALSE(ip_addr_1 > ip_addr_1);
+}
+
+TEST(IPADDR_CLASS, OPERATOR_EQ)
+{
+    // Arrange
+    std::vector<std::string> tokens_1 = {"192","168","1","10"};
+    ipv4_addr ip_addr_1(tokens_1);
+    ipv4_addr ip_addr_2(tokens_1);
+
+    // Act & Assert
+    ASSERT_TRUE(ip_addr_1 == ip_addr_2);
+}
+
+TEST(IPADDR_CLASS, OPERATOR_NOT_EQ)
+{
+    // Arrange
+    std::vector<std::string> tokens_1 = {"192","168","1","10"};
+    ipv4_addr ip_addr_1(tokens_1);
+    std::vector<std::string> tokens_2 = {"192","168","1","20"};
+    ipv4_addr ip_addr_2(tokens_2);
+
+    // Act & Assert
+    ASSERT_TRUE(ip_addr_1 != ip_addr_2);
+}
+
+
 
 

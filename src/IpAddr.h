@@ -13,6 +13,9 @@ public:
     bool contains(unsigned char) const;
 
     bool operator<(const ipv4_addr& rhs) const;
+    bool operator>(const ipv4_addr& rhs) const;
+    bool operator==(const ipv4_addr& rhs) const;
+    bool operator!=(const ipv4_addr& rhs) const;
     unsigned char operator[](std::size_t index) const;
     friend std::ostream& operator<<(std::ostream& os, const ipv4_addr& obj);
 
