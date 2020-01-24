@@ -1,11 +1,10 @@
 #ifndef FILTER_H
 #define FILTER_H
 
-#include <vector>
-#include <list>
-#include <string>
-#include <algorithm>
 #include "IpAddr.h"
+
+#include <list>
+#include <algorithm>
 
 std::list<ipv4_addr>
     filter(const std::list<ipv4_addr>& src,

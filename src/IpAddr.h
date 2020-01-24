@@ -1,9 +1,9 @@
 #ifndef IPADDR_H
 #define IPADDR_H
 
-#include <vector>
-#include <string>
 #include <array>
+#include <string>
+#include <vector>
 
 class ipv4_addr
 {

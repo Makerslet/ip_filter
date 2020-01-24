@@ -1,5 +1,4 @@
 #include "Filter.h"
-#include <iostream>
 
 std::list<ipv4_addr> filter(const std::list<ipv4_addr> &src, const std::pair<std::size_t, unsigned char> &to_find)
 {

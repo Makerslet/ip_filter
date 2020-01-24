@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.2)
 
+find_package(Threads REQUIRED)
+find_package(GTest REQUIRED)
+
 add_executable(test_ip_filter   test_ip_filter.cpp
                                 ${PROJECT_SOURCE_DIR}/src/Parser.cpp
                                 ${PROJECT_SOURCE_DIR}/src/IpAddr.cpp

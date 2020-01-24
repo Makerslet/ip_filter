@@ -9,9 +9,6 @@ else()
     project(ip_filter VERSION 0.0.1)
 endif()
 
-find_package(Threads REQUIRED)
-find_package(GTest REQUIRED)
-
 # включаем тесты
 enable_testing()
 

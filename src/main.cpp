@@ -1,8 +1,9 @@
-#include <iostream>
-#include <list>
+#include "IpAddr.h"
 #include "Filter.h"
 #include "Parser.h"
-#include "IpAddr.h"
+
+#include <iostream>
+#include <list>
 
 int main (int, char **)
 {
