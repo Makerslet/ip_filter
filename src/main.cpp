@@ -7,7 +7,9 @@
 
 int main (int, char **)
 {
-    std::list<ipv4_addr> ip_pool;
+    std::list<ip_addr<4>> ip_pool;
+    //ip_addr<5> ip((std::vector<std::string>()));
+    /*
     for(std::string line; std::getline(std::cin, line);)
     {
         std::vector<std::string> tokens = split(line, '\t');
@@ -19,23 +21,23 @@ int main (int, char **)
         }
     }
 
-    auto reverse_comparator = [](const ipv4_addr& lhs, const ipv4_addr& rhs) { return rhs < lhs; };
+    auto reverse_comparator = [](const ip_addr<4>& lhs, const ip_addr<4>& rhs) { return rhs < lhs; };
 
     ip_pool.sort(reverse_comparator);
-    for(const ipv4_addr& ip : ip_pool)
-        std::cout<< ip << std::endl;
+    for(const ip_addr<4>& ip : ip_pool)
+        std::cout<< ip.to_str() << std::endl;
 
     auto result_simple_filter = filter(ip_pool, {0, 1});
-    for(const ipv4_addr& ip : result_simple_filter)
-        std::cout<< ip << std::endl;
+    for(const ip_addr<4>& ip : result_simple_filter)
+        std::cout<< ip.to_str() << std::endl;
 
     auto result_and_filter = filter_and(ip_pool, {{0, 46},{1, 70}});
-    for(const ipv4_addr& ip : result_and_filter)
-        std::cout<< ip << std::endl;
+    for(const ip_addr<4>& ip : result_and_filter)
+        std::cout<< ip.to_str() << std::endl;
 
     auto result_any_filter = filter_any(ip_pool, 46);
-    for(const ipv4_addr& ip : result_any_filter)
-        std::cout << ip << std::endl;
+    for(const ip_addr<4>& ip : result_any_filter)
+        std::cout << ip.to_str() << std::endl;*/
 
     return 0;
 }
