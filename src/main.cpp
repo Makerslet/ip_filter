@@ -8,8 +8,7 @@
 int main (int, char **)
 {
     std::list<ip_addr<4>> ip_pool;
-    //ip_addr<5> ip((std::vector<std::string>()));
-    /*
+
     for(std::string line; std::getline(std::cin, line);)
     {
         std::vector<std::string> tokens = split(line, '\t');
@@ -37,7 +36,7 @@ int main (int, char **)
 
     auto result_any_filter = filter_any(ip_pool, 46);
     for(const ip_addr<4>& ip : result_any_filter)
-        std::cout << ip.to_str() << std::endl;*/
+        std::cout << ip.to_str() << std::endl;
 
     return 0;
 }
