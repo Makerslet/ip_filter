@@ -6,6 +6,7 @@ before_script:
 - sudo scripts/gtest_install_script.sh
 - sudo scripts/conan_install_script.sh
 script:
+- conan install .
 - cmake .
 - cmake --build .
 - cmake --build . --target test
