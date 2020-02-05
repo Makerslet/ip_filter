@@ -3,7 +3,8 @@ language: cpp
 before_script:
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get update -qq
-- sudo ./gtest_install_script.sh
+- sudo scripts/gtest_install_script.sh
+- sudo scripts/conan_install_script.sh
 script:
 - cmake .
 - cmake --build .
