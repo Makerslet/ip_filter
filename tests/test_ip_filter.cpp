@@ -1,6 +1,5 @@
 #include "IpAddr.h"
 #include "Parser.h"
-#include "Filter.h"
 
 #include <list>
 
