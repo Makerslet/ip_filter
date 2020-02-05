@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 add_executable(ip_filter    main.cpp
-                            Filter.h
+                            Utils.h
                             Parser.h Parser.cpp
                             IpAddr.h IpAddr.cpp)
 
@@ -10,7 +10,7 @@ conan_basic_setup()
 
 # включаем 14 стандарт для наших целей
 set_target_properties(ip_filter PROPERTIES
-    CXX_STANDARD 14
+    CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
 
