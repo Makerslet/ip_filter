@@ -15,6 +15,9 @@ script:
 deploy:
   provider: script
   skip_cleanup: true
-  all_branches: true
+  branches:
+    only:
+      - master
+      - ranges-v3
   script:
   - curl -T ip_filter-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umakerslet:$BINTRAY_API_KEY "https://api.bintray.com/content/makerslet/ipfilter/package/$TRAVIS_BUILD_NUMBER/ip_filter-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
