@@ -7,7 +7,6 @@
 #include <cstddef>
 #include <iostream>
 #include <vector>
-#include <range/v3/algorithm/for_each.hpp>
 
 class Utils
 {
@@ -30,6 +29,15 @@ public:
         return ip_pool;
     }
 
+    template<typename Container>
+    static std::ostream& print_all(std::ostream& os, const Container& cont)
+    {
+        for(const auto& ip : cont)
+            os << ip.to_str() << std::endl;
+
+        return  os;
+    }
+
     template <std::size_t N>
     struct find_one_func {
         explicit find_one_func(std::pair<std::size_t, unsigned char> s_elem) :
@@ -45,7 +53,6 @@ public:
     };
 
     static inline auto reverse_comparator = [](const ip_addr<4>& lhs, const ip_addr<4>& rhs) { return rhs < lhs; };
-    static inline auto print = [](const auto& ip) {std::cout << ip.to_str() << std::endl;};
 
 };
 
