@@ -10,18 +10,18 @@ class Filter {
 public:
 template <std::size_t N, typename Container>
 static Container filter(const Container& src,
-           const std::pair<std::size_t, unsigned char>& to_find) {
+           const Utils::Condition& condition) {
 
-    Utils::find_one_func<N> func(to_find);
+    Utils::find_one_func<N> func(condition);
     return src | ranges::view::filter(func) | ranges::to<Container>;
 }
 
 template <std::size_t N, typename Container>
 static Container filter_and(const Container& src,
-            const std::vector<std::pair<std::size_t, unsigned char>>& to_find) {
+            const std::vector<Utils::Condition>& conditions) {
 
     std::vector<Utils::find_one_func<N>> functors;
-    for(const auto& value : to_find)
+    for(const auto& value : conditions)
         functors.emplace_back(value);
 
     auto and_lambda = [functors](const ip_addr<4>& ip){
@@ -36,9 +36,9 @@ static Container filter_and(const Container& src,
 
 template <std::size_t N, typename Container>
 static Container filter_any(const Container& src,
-            unsigned char to_find) {
+            unsigned char condition) {
 
-    auto find_any = [to_find](const ip_addr<4>& ip) {return ip.contains(to_find);};
+    auto find_any = [condition](const ip_addr<4>& ip) {return ip.contains(condition);};
     return  src | ranges::view::filter(find_any) | ranges::to<Container>;
 }
 

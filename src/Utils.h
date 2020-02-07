@@ -11,6 +11,8 @@
 class Utils
 {
 public:
+    using Condition = std::pair<std::size_t, unsigned char>;
+
     template<std::size_t N>
     static std::vector<ip_addr<N>> read_ip_from_input() {
         std::vector<ip_addr<N>> ip_pool;
@@ -40,17 +42,18 @@ public:
 
     template <std::size_t N>
     struct find_one_func {
-        explicit find_one_func(std::pair<std::size_t, unsigned char> s_elem) :
-            search_elem(s_elem){}
+        explicit find_one_func(Condition s_elem) :
+            cond(s_elem){}
 
         bool operator()(const ip_addr<N>& ip) const {
-            if(search_elem.first >= ip_addr<N>::num_components)
+            if(cond.first >= ip_addr<N>::num_components)
                 return false;
-            return  ip[search_elem.first] == search_elem.second;
+            return  ip[cond.first] == cond.second;
         }
 
-        std::pair<std::size_t, unsigned char> search_elem;
+        Condition cond;
     };
+
 
     static inline auto reverse_comparator = [](const ip_addr<4>& lhs, const ip_addr<4>& rhs) { return rhs < lhs; };
 
